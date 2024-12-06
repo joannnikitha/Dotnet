@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MvcCrudWithoutEF.Models.User>
+
+@{
+    ViewBag.Title = "User List";
+    var message = TempData["message"] as string;
+}
+<h2>User List</h2>
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-success">
+        @message
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Name</td>
+            <td>@user.Age</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id })|
+                @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            </td>
+        </tr>
+    }
+</table>
+<p>@Html.ActionLink("Create New", "Create")</p>
